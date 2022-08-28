@@ -1,3 +1,3 @@
-/home/mango/CLionProjects/EMS/cmake-build-debug/CMakeFiles/EMS.dir
-/home/mango/CLionProjects/EMS/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/mango/CLionProjects/EMS/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/Repozytoria/EMS2/cmake-build-debug/CMakeFiles/EMS.dir
+D:/Repozytoria/EMS2/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Repozytoria/EMS2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
