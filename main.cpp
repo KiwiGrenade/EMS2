@@ -2,21 +2,24 @@
 #include <vector>
 #include <string>
 #include <unordered_set>
+#include "Rotor.h"
 
-size_t* getRotors(size_t nRotors)
+void getNumbers(size_t *rotors, const size_t nRotors)
 {
-    size_t wantedRotors[nRotors];
     for (size_t i = 0; i < nRotors; i++)
     {
-        std::cin >> wantedRotors[i];
-        if (std::cin.fail())
-        {
-            std::cout << "ERROR 505";
-            break;
-        }
+        std::cin >> *(rotors + i);
     }
-    return wantedRotors;
 }
+
+void getPositions(size_t *positions, const size_t nRotors)
+{
+    for(size_t i = 0; i < nRotors; i++)
+    {
+        std::cin >> *(positions + i);
+    }
+}
+
 
 std::string getPlugboard()
 {
@@ -25,7 +28,7 @@ std::string getPlugboard()
     while (plugboard.find(' ') != -1)
     {
         plugboard.erase(plugboard.find(' '), 1);
-    }
+}
     return plugboard;
 }
 
@@ -84,7 +87,6 @@ int main()
     }
     while(isPlugboardValid(plugboard) == false);
 
-
     size_t nRotors;
     do
     {
@@ -96,7 +98,20 @@ int main()
 
     std::cout << "Enter numbers of rotors that you would like to use (from 1 to 8)." << std::endl
               << "Ex.: 1 2 8 3 4 (press ENTER to save)" << std::endl;
-    size_t* wantedRotors = getRotors(nRotors);
+    size_t numbers[nRotors];
+    getNumbers(numbers, nRotors);
+
+    std::cout << std::endl
+              << "Please enter the positions of the rotors (0-26):" << std::endl;
+    size_t positions[nRotors];
+    getPositions(positions, nRotors);
+
+    std::vector<Rotor*> rotors;
+
+    for(size_t i = 0; i < nRotors; i++)
+    {
+        rotors.push_back(new Rotor(numbers[i], positions[i]));
+    }
 
     std::cout << "Enter text you want to encrypt: " << std::endl;
     std::cin.clear();
@@ -111,16 +126,21 @@ int main()
     while (line.length() != 0);
 
     runPlugboard(plugboard, textToEncrypt);
-    for (size_t row = 0; row < textToEncrypt.size(); row++)
+
+    for(size_t i = 0; i < nRotors; i++)
     {
-        for(size_t col = 0; col < textToEncrypt[row].size(); col++)
-        {
-            encrypt(&textToEncrypt[row][col], nRotors, wantedRotors);
-        }
+        rotors[i]->goThrough(textToEncrypt);
     }
+
     for (size_t i = 0; i < textToEncrypt.size(); i++)
     {
         std::cout << textToEncrypt[i] << std::endl;
     }
+
+    for(size_t i = 0; i < rotors.size(); i++)
+    {
+        delete rotors[i];
+    }
+
     return 0;
 }

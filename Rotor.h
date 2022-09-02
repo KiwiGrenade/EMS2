@@ -21,7 +21,7 @@ private:
                     // rotor V
                     {"VZBRGITYUPSDNHLXAWMJQOFECK"},
             };
-    constexpr static  size_t turnoverNotchPosition[6] =
+    constexpr static size_t notchPosition[6] =
             {
                 0,
                 17,
@@ -30,9 +30,11 @@ private:
                 10,
                 0,
             };
-    static size_t position[6];
+    inline static size_t position[6];
     size_t number;
 public:
-    Rotor(size_t number, size_t position) noexcept(true);
+    Rotor(size_t number, size_t pos) noexcept(true);
+    ~Rotor() = default;
     void goThrough(std::vector<std::string> &text) noexcept(true);
+    void step() noexcept(true);
 };
