@@ -53,6 +53,17 @@ void runPlugboard(const std::string &plugboard, std::vector<std::string> &text)
     }
 }
 
+void encrypt(std::vector<std::string> &text)
+{
+    for(size_t i = 0; i < text.size(); i++)
+    {
+        for(size_t j = 0; j < text[i].size(); j++)
+        {
+
+        }
+    }
+}
+
 int main()
 {
     char choice;
@@ -110,31 +121,28 @@ int main()
 
     for(size_t i = 0; i < nRotors; i++)
     {
-        rotors.push_back(new Rotor(numbers[i], positions[i]));
+        rotors.push_back(new Rotor(numbers[i], positions[i], i));
     }
 
     std::cout << "Enter text you want to encrypt: " << std::endl;
     std::cin.clear();
     std::cin.ignore(256, '\n');
-    std::vector <std::string> textToEncrypt;
+    std::vector <std::string> text;
     std::string line;
     do
     {
         std::getline(std::cin, line);
-        textToEncrypt.push_back(line);
+        text.push_back(line);
     }
     while (line.length() != 0);
 
-    runPlugboard(plugboard, textToEncrypt);
+    runPlugboard(plugboard, text);
 
-    for(size_t i = 0; i < nRotors; i++)
-    {
-        rotors[i]->goThrough(textToEncrypt);
-    }
+    encrypt(text);
 
-    for (size_t i = 0; i < textToEncrypt.size(); i++)
+    for (size_t i = 0; i < text.size(); i++)
     {
-        std::cout << textToEncrypt[i] << std::endl;
+        std::cout << text[i] << std::endl;
     }
 
     for(size_t i = 0; i < rotors.size(); i++)

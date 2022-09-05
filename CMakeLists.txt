@@ -3,4 +3,4 @@ project(EMS)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(EMS main.cpp Rotor.cpp Rotor.h)
+add_executable(EMS main.cpp Rotor.cpp Rotor.h TrainOfGears.cpp TrainOfGears.h)

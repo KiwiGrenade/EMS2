@@ -30,10 +30,11 @@ private:
                 10,
                 0,
             };
-    inline static size_t position[6];
+    inline static size_t abcPosition[6];
+    inline static size_t rotorPlacement[6];
     size_t number;
 public:
-    Rotor(size_t number, size_t pos) noexcept(true);
+    Rotor(size_t number, size_t pos, size_t place) noexcept(true);
     ~Rotor() = default;
     void goThrough(std::vector<std::string> &text) noexcept(true);
     void step() noexcept(true);

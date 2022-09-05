@@ -3,22 +3,21 @@
 //
 #include <iostream>
 #include <vector>
-#include <string>
 #include "Rotor.h"
 
-Rotor::Rotor(size_t number, size_t pos) noexcept(true)
-:   number(number)
+Rotor::Rotor(size_t number, size_t pos, size_t place) noexcept(true)
 {
-    position[number] = pos;
+    this->number = number;
+    abcPosition[number] = pos;
 }
 
 void Rotor::step() noexcept(true)
 {
-    if(position[number] == notchPosition[number])
+    if(abcPosition[number] == notchPosition[number])
     {
-        position[number + 1] = (position[number + 1] + 1) % 26;
+        abcPosition[number + 1] = (abcPosition[number + 1] + 1) % 26;
     }
-    position[number] = (position[number] + 1) % 26;
+    abcPosition[number] = (abcPosition[number] + 1) % 26;
 }
 
 void Rotor::goThrough(std::vector <std::string> &text) noexcept(true)
@@ -32,12 +31,12 @@ void Rotor::goThrough(std::vector <std::string> &text) noexcept(true)
             //is char CAP?
             if((translation >= ((int)'A')) && (translation <= ((int)'Z')))
             {
-                if((position[number] + notchPosition[number]) % 26 == 0)
+                if((abcPosition[number] + notchPosition[number]) % 26 == 0)
                 {
-                    position[number + 1] = (position[number + 1] + 1) % 26;
+                    abcPosition[number + 1] = (abcPosition[number + 1] + 1) % 26;
                 }
-                position[number] = (position[number] + 1) % 26;
-                size_t index = (translation - 65 + position[number]) % 26;
+                abcPosition[number] = (abcPosition[number] + 1) % 26;
+                size_t index = (translation - 65 + abcPosition[number]) % 26;
                 text[k][m] = rotorList[number][index];
             }
         }
