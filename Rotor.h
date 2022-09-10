@@ -3,24 +3,13 @@
 //
 #pragma once
 #include <iostream>
+#include <vector>
 class Rotor
 {
 private:
-    const std::string rotorList[6] =
-            {
-                    // normal alphabet
-                    {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"},
-                    // rotor I
-                    {"EKMFLGDQVZNTOWYHXUSPAIBRCJ"},
-                    // rotor II
-                    {"AJDKSIRUXBLHWTMCQGZNPYFVOE"},
-                    // rotor III
-                    {"BDFHJLCPRTXVZNYEIWGAKMUSQO"},
-                    // rotor IV
-                    {"ESOVPZJAYQUIRHXLNFTGKDCMWB"},
-                    // rotor V
-                    {"VZBRGITYUPSDNHLXAWMJQOFECK"},
-            };
+    /*TO CHECK:
+     * Be rotor nr. 1. Should notch activate when 17 is "visible", or
+     * when paw hits position 17?*/
     constexpr static size_t notchPosition[6] =
             {
                 0,
@@ -30,12 +19,14 @@ private:
                 10,
                 0,
             };
-    inline static size_t abcPosition[6];
-    inline static size_t rotorPlacement[6];
+    size_t position;
     size_t number;
 public:
-    Rotor(size_t number, size_t pos, size_t place) noexcept(true);
+    Rotor(size_t num, size_t pos) noexcept(true);
     ~Rotor() = default;
     void goThrough(std::vector<std::string> &text) noexcept(true);
     void step() noexcept(true);
+    size_t getPosition() noexcept(true);
+    size_t getNotchPosition() noexcept(true);
+    size_t getNumber() noexcept(true);
 };
